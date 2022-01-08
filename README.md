@@ -20,7 +20,7 @@ mysql cloud server informations :
 
 **Server host**: mysql-65456-0.cloudclusters.net
 
-**Name**: SCRUM
+**DB Name**: SCRUM
 
 **Username**: admin
 
