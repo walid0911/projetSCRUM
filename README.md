@@ -18,15 +18,15 @@ project management:** git + github + github project planner
 
 mysql cloud server informations :
 
-**Server host**: sql11.freemysqlhosting.net
+**Server host**: mysql-65456-0.cloudclusters.net
 
-**Name**: sql11463827
+**DB Name**: SCRUM
 
-**Username**: sql11463827
+**Username**: admin
 
-**Password**: dUj7Bn47yW
+**Password**: ooDjSq4Q
 
-**Port number**: 3306
+**Port number**: 10629
 
 MPD:
 ![MLD](https://user-images.githubusercontent.com/73041562/148467512-0d57a3f4-d4ad-400d-be5d-f5f3ccd6b2a2.png)
