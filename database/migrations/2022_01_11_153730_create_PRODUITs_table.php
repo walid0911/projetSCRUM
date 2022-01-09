@@ -16,7 +16,7 @@ class CreatePRODUITsTable extends Migration
         Schema::create('PRODUITs', function (Blueprint $table) {
             $table->id('ID_PRODUIT');
             $table->unsignedBigInteger("ID_MENU");
-            $table->foreign('ID_MENU')->references('ID_MENU')->on('MENU')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('ID_MENU')->references('ID_MENU')->on('MENUs')->onUpdate('cascade')->onDelete('cascade');
             $table->string('NOM_PRODUIT');
             $table->string('TYPE_PRODUIT');
             $table->string('DESCRIPTION');

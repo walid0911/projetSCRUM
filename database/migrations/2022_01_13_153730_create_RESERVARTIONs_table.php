@@ -16,9 +16,9 @@ class CreateRESERVARTIONsTable extends Migration
         Schema::create('RESERVARTIONs', function (Blueprint $table) {
             $table->id('ID_RESERVATION');
             $table->unsignedBigInteger('ID_CLIENT');
-            $table->foreign('ID_CLIENT')->references('ID_CLIENT')->on('CLIENT')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('ID_CLIENT')->references('ID_CLIENT')->on('CLIENTs')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger("ID_TABLE");
-            $table->foreign('ID_TABLE')->references('ID_TABLE')->on('TABLE')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('ID_TABLE')->references('ID_TABLE')->on('TABLEs')->onUpdate('cascade')->onDelete('cascade');
             $table->date('DATE_RESERVATION');
             $table->integer('DUREE');
             $table->string('RESERVE_POUR');

@@ -16,7 +16,7 @@ class CreateMENUsTable extends Migration
         Schema::create('MENUs', function (Blueprint $table) {
             $table->id('ID_MENU');
             $table->unsignedBigInteger('ID_REST');
-            $table->foreign('ID_REST')->references('ID_REST')->on('RESTAURANT')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('ID_REST')->references('ID_REST')->on('RESTAURANTs')->onUpdate('cascade')->onDelete('cascade');
             $table->string('IMG_MENU')->nullable();
             $table->timestamps();
         });

@@ -16,7 +16,7 @@ class CreateTABLEsTable extends Migration
         Schema::create('TABLEs', function (Blueprint $table) {
             $table->id('ID_TABLE');
             $table->unsignedBigInteger('ID_REST');
-            $table->foreign('ID_REST')->references('ID_REST')->on('RESTAURANT')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('ID_REST')->references('ID_REST')->on('RESTAURANTs')->onUpdate('cascade')->onDelete('cascade');
             $table->integer('NBR_PLACES');
             $table->string('IMG_TABLE', 1024)->nullable();
             $table->timestamps();

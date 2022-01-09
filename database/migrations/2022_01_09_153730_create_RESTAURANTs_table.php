@@ -16,7 +16,7 @@ class CreateRESTAURANTsTable extends Migration
         Schema::create('RESTAURANTs', function (Blueprint $table) {
             $table->id('ID_REST');
             $table->unsignedBigInteger("ID_GERANT");
-            $table->foreign('ID_GERANT')->references('ID_GERANT')->on('GERANT')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('ID_GERANT')->references('ID_GERANT')->on('GERANTs')->onUpdate('cascade')->onDelete('cascade');
             $table->string('MATRICULE');
             $table->string('NOM_REST');
             $table->string('ADRESSE');
