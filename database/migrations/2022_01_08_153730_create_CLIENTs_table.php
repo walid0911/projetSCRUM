@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGERANTTable extends Migration
+class CreateCLIENTsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateGERANTTable extends Migration
      */
     public function up()
     {
-        Schema::create('GERANT', function (Blueprint $table) {
-            $table->id('ID_GERANT');
+        Schema::create('CLIENTs', function (Blueprint $table) {
+            $table->id('ID_CLIENT');
             $table->string('USERNAME')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -36,6 +36,6 @@ class CreateGERANTTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('GERANT');
+        Schema::dropIfExists('CLIENTs');
     }
 }

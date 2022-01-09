@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCLIENTTable extends Migration
+class CreateADMINsTsable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateCLIENTTable extends Migration
      */
     public function up()
     {
-        Schema::create('CLIENT', function (Blueprint $table) {
-            $table->id('ID_CLIENT');
+        Schema::create('ADMINs', function (Blueprint $table) {
+            $table->id('ID_ADMIN');
             $table->string('USERNAME')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -36,6 +36,6 @@ class CreateCLIENTTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('CLIENT');
+        Schema::dropIfExists('ADMINs');
     }
 }

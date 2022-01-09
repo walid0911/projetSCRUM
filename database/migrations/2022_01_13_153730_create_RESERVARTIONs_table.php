@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRESERVARTIONTable extends Migration
+class CreateRESERVARTIONsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateRESERVARTIONTable extends Migration
      */
     public function up()
     {
-        Schema::create('RESERVARTION', function (Blueprint $table) {
+        Schema::create('RESERVARTIONs', function (Blueprint $table) {
             $table->id('ID_RESERVATION');
             $table->unsignedBigInteger('ID_CLIENT');
             $table->foreign('ID_CLIENT')->references('ID_CLIENT')->on('CLIENT')->onUpdate('cascade')->onDelete('cascade');
@@ -33,6 +33,6 @@ class CreateRESERVARTIONTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('RESERVARTION');
+        Schema::dropIfExists('RESERVARTIONs');
     }
 }
