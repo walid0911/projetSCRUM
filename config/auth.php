@@ -17,6 +17,19 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
+    'client'=>[
+        'driver'=>'eloquent',
+        'model'=>App\Models\Client::class,
+    ],
+    'gerant'=>[
+        'driver'=>'eloquent',
+        'model'=>App\Models\Gerant::class,
+    ],
+    'admin'=>[
+        'driver'=>'eloquent',
+        'model'=>App\Models\Admin::class,
+    ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -40,6 +53,25 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
+        ],
+        'client'=>[
+            'driver'=>'session',
+            'provider'=>'clients',
+        ],
+
+        'gerant'=>[
+            'driver'=>'session',
+            'provider'=>'gerants',
+        ],
+        'admin'=>[
+            'driver'=>'session',
+            'provider'=>'admins',
+        ],
+
     ],
 
     /*
@@ -69,6 +101,18 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        'clients'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\Client::class,
+        ],
+        'gerants'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\Gerant::class,
+        ],
+        'admins'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\Admin::class,
+        ],
     ],
 
     /*
@@ -92,6 +136,18 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
+        ],
+        'clients'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\Client::class,
+        ],
+        'gerants'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\Gerant::class,
+        ],
+        'admins'=>[
+            'driver'=>'eloquent',
+            'model'=>App\Models\Admin::class,
         ],
     ],
 
