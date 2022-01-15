@@ -1,6 +1,17 @@
 @extends("layouts.app")
 
 @section('content')
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="container pb-5">
         <h1 class="pt-3 pb-2 px-3">Edit Profile</h1>
         <hr>
@@ -12,12 +23,12 @@
                 <div class="col-md-3 mt-4 float-start" >
                     <div class="text-center">
                         @if($gerant->IMG_USER == null)
-                            <img style="width:600px;" class="img-circle img-thumbnail isTooltip" src="{{asset('img')}}/profiles/default.jpg">
+                            <img style="width:600px;" class="img-circle img-thumbnail isTooltip" src="{{asset('storage/uploads/default.jpg')}}">
                         @else
-                            <img style="width:600px;" class="img-circle img-thumbnail isTooltip" src=" {{asset('img')}}/profiles/{{$gerant->IMG_USER}}">
+                            <img style="width:600px;" class="img-circle img-thumbnail isTooltip" src="{{asset('storage/uploads/' . $gerant->IMG_USER)}}">
                         @endif
                         <h6>Upload a different photo...</h6>
-                        <input type="file" class="form-control" form="editProfileForm" name="image" accept="image/*">
+                        <input type="file" class="form-control" name="IMG_USER" accept="image/*">
                     </div>
                 </div>
 

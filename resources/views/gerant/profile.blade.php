@@ -1,15 +1,24 @@
 @extends("layouts.app")
 
 @section('content')
-
+    @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+    @if(session()->has('error'))
+        <div class="alert alert-danger" align="center">
+            {{ session()->get('error') }}
+        </div>
+    @endif
     <div class="container bootstrap snippets bootdey mt-5 mb-5 ">
         <div class="panel-body inf-content">
             <div class="row">
                 <div class="col-md-4">
                     @if($gerant->IMG_USER == null)
-                        <img style="width:600px;" class="img-circle img-thumbnail isTooltip" src="{{asset('img')}}default.jpg">
+                        <img style="width:600px;" class="img-circle img-thumbnail isTooltip" src="{{asset('storage/uploads/default.jpg')}}">
                     @else
-                        <img style="width:600px;" class="img-circle img-thumbnail isTooltip" src=" {{asset('img')}}/profiles/{{$gerant->IMG_USER}}">
+                        <img style="width:500px;" class="img-circle img-thumbnail isTooltip" src=" {{asset('storage/uploads/' . $gerant->IMG_USER)}}">
                     @endif
                 </div>
                 <div class="col-md-6 p-3">

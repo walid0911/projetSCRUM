@@ -1,56 +1,71 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Gerant;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use function Psy\sh;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\SessionGuard;
 
 class GerantController extends Controller
 {
 
     public function profile()
     {
-        //should be something like: $gerant = Auth::user();
-        $gerant = Gerant::find(1);
+        $gerant = Auth::user();
         return view("gerant.profile", compact('gerant'));
     }
 
     public function editProfile()
     {
-        //should be something like: $gerant = Auth::user();
-        $gerant = Gerant::find(1);
+        $gerant = Auth::user();
         return view("gerant.editProfile", compact('gerant'));
     }
 
     public function updateProfile()
     {
-        $gerant = Gerant::find(1);
+        $gerant = Auth::user();
 
-        $this->authorize('update', $gerant);
-
+        // Data Validation
         $data = request()->validate([
             'NOM' => 'required',
             'USERNAME' => 'required',
             'TEL' => 'required|min:11|numeric',
             'PAYS' => 'required',
-            'VILLE' => 'required'
+            'VILLE' => 'required',
+            'IMG_USER' => ''
         ]);
+        if (request('IMG_USER')) {
 
-        if (request('image')) {
-            $imagePath = request('image')->store('profile', 'public');
 
-            $image = Image::make(public_path("storage/{$imagePath}"))->fit(1000, 1000);
-            $image->save();
+//            $imagePath = request('IMG_USER')->store("public/uploads");
+            $imagePath = request('IMG_USER');
+            $filename = date('YmdHi').'.'.$imagePath->getClientOriginalExtension();
 
-            $imageArray = ['image' => $imagePath];
+            $imagePath->move(public_path('storage/uploads'),$filename);
+
+
+            // If user had an image delete it
+            if($gerant->IMG_USER){
+                @unlink(public_path('storage/uploads/') . $gerant->IMG_USER);
+            }
+
+            $gerant['IMG_USER'] = $filename;
         }
 
-        $gerant->update(array_merge($data, $imageArray));
-        return view("hihi");
+        $update = $gerant->update($data);
+        $gerant->save();
+        if($update)
+            return redirect("/gerant/profile")->with('success','Profile Updated!');
+        else
+        {
+            return redirect()->route('gerant/profile/edit')->with('error', 'Something went wrong');
+        }
     }
+
+
     function create(Request $request)
     {
         //Validate Inputs

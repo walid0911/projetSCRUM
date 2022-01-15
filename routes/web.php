@@ -31,6 +31,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Probably should be inside a middleware
 Route::get('/gerant/profile', [GerantController::class, 'profile']);
 
+
+
+
 Route::prefix('client')->name('client.')->group(function() {
 
     Route::middleware(['guest:client','PreventBackHistory'])->group(function(){
@@ -43,6 +46,7 @@ Route::prefix('client')->name('client.')->group(function() {
     Route::middleware(['auth:client','PreventBackHistory'])->group(function(){
         Route::view('/home','dashboard.client.home')->name('home');
         Route::post('logout',[ClientController::class,'logout'])->name('logout');
+
     });
 });
 
@@ -58,6 +62,11 @@ Route::prefix('gerant')->name('gerant.')->group(function(){
     Route::middleware(['auth:gerant','PreventBackHistory'])->group(function(){
         Route::view('/home','dashboard.gerant.home')->name('home');
         Route::post('logout',[GerantController::class,'logout'])->name('logout');
+
+        Route::get('/profile', [GerantController::class, 'profile'])->name("profile");
+        Route::get('/profile/edit', [GerantController::class, 'editProfile'])->name("edit");
+        Route::patch('/profile', [GerantController::class, 'updateProfile'])->name("update");
+
     });
 
 });
