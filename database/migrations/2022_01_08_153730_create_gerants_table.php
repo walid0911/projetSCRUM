@@ -24,6 +24,7 @@ class CreateGerantsTable extends Migration
             $table->string('PAYS')->nullable();
             $table->string('VILLE')->nullable();
             $table->string('IMG_USER')->nullable();
+            $table->unsignedBigInteger('ID_REST')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
