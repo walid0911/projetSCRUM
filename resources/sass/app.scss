@@ -485,7 +485,8 @@ section {
 }
 #about .about-container .background {
     min-height: 300px;
-    background: url(../img/about-img.jpg) center top no-repeat;
+    background: url(../img/about-img.jpg) center center no-repeat;
+    background-size: cover;
     margin-bottom: 10px;
 }
 #about .about-container .content {

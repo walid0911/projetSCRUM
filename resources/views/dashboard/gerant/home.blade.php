@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gerant Dashboard | Home</title>
-    <link rel="stylesheet" href="{{ asset('bootstrap.min.css') }}">
-</head>
-<body>
+@extends('layouts.app')
 
+@section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3" style="margin-top: 45px">
@@ -24,9 +16,9 @@
                 <tbody>
                 <tr>
 
-                    <td><!-- //Auth::guard('gerant')->gerant()->NOM }}--></td>
-                    <td><!-- //Auth::guard('gerant')->gerant()->email }}--></td>
-                    <td><!-- //Auth::guard('gerant')->gerant()->USERNAME }}--></td>
+                    <td>{{ Auth::guard('gerant')->user()->USERNAME }}</td>
+                    <td>{{ Auth::guard('gerant')->user()->email }}</td>
+                    <td>{{ Auth::guard('gerant')->user()->USERNAME }}</td>
                     <td>
                         <a href="{{ route('gerant.logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</a>
                         <form action="{{ route('gerant.logout') }}" method="post" class="d-none" id="logout-form">@csrf</form>
@@ -37,6 +29,4 @@
         </div>
     </div>
 </div>
-
-</body>
-</html>
+@endsection

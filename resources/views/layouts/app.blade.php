@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link rel="icon" href="img/favicon.png" type="image/x-icon">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'CheapMeals.ma') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -43,7 +43,7 @@
     <div class="container d-flex justify-content-between align-items-center">
 
         <div id="logo">
-            <a href="index.html"><img src="/img/logo.png" width="200" alt=""></a>
+            <a href="{{ route('/') }}"><img src="/img/logo.png" width="200" alt=""></a>
         </div>
 
         <a class="btn btn-secondary px-2 py-1" style="font-size: .8rem;">For Restaurants</a>
@@ -54,73 +54,65 @@
                 <li><a class="nav-link scrollto" href="#all_restaurants">All Restaurants</a></li>
                 <li><a class="nav-link scrollto" href="#services">Services</a></li>
                 <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                @guest
+                    @if (Route::has('client.login'))
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary" href="{{ route('client.login') }}">{{ __('Login') }}</a>
+                        </li>
+                    @endif
+
+                    @if (Route::has('client.register'))
+                        <li class="nav-item">
+                            <a class="nav-link text-secondary" href="{{ route('client.register') }}">{{ __('Register') }}</a>
+                        </li>
+                    @endif
+
+                @else
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            @if(Auth::user()->IMG_USER == null)
+                                <img src="{{asset('storage/uploads/default.png')}}" alt="mdo" width="32" height="32" class="rounded-circle m-1">
+                            @else
+                                <img src="{{asset('storage/uploads/' . Auth::user()->IMG_USER)}}" alt="mdo" width="32" height="32" class="rounded-circle m-1">
+                            @endif
+                            <div class="m-1 text-secondary">{{ Auth::user()->USERNAME }}</div>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-start" aria-labelledby="navbarDropdown">
+                            @auth('gerant')
+                                <a class="dropdown-item text-primary text-lowercase" href="{{ route('gerant.profile') }}">{{ __('Profile') }}</a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item text-primary text-lowercase" href="{{ route('gerant.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                            @elseauth('client')
+                                <a class="dropdown-item text-primary text-lowercase" href="{{ route('gerant.profile') }}">{{ __('Profile') }}</a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item text-primary text-lowercase" href="{{ route('client.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                </a>
+                            @endif
+
+
+
+                            <form id="logout-form" action="{{ route('client.logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                @endguest
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
+        </nav>
     </div>
 </header>
 <!-- End Header -->
 
-<!--<div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                &lt;!&ndash; Left Side Of Navbar &ndash;&gt;
-                <ul class="navbar-nav me-auto">
-
-                </ul>
-
-                &lt;!&ndash; Right Side Of Navbar &ndash;&gt;
-                <ul class="navbar-nav ms-auto">
-                    &lt;!&ndash; Authentication Links &ndash;&gt;
-                    @guest
-                        @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @endif
-
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
-                    @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
-        </div>
-    </nav>
-</div>-->
-
 <!-- ======= Main ======= -->
-<main class="py-4">
+<main>
     @yield('content')
 </main>
+<!-- End Main -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer" class="py-3">

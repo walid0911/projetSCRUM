@@ -17,25 +17,10 @@ use App\Http\Controllers\AdminController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/test', function () {
-    return view('test');
-});
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Probably should be inside a middleware
-Route::get('/gerant/profile', [GerantController::class, 'profile']);
-
-
-
+    return view('home');
+})->name('/');
 
 Route::prefix('client')->name('client.')->group(function() {
-
     Route::middleware(['guest:client','PreventBackHistory'])->group(function(){
         Route::view('/login','dashboard.client.login')->name('login');
         Route::view('/register','dashboard.client.register')->name('register');
@@ -46,12 +31,10 @@ Route::prefix('client')->name('client.')->group(function() {
     Route::middleware(['auth:client','PreventBackHistory'])->group(function(){
         Route::view('/home','dashboard.client.home')->name('home');
         Route::post('logout',[ClientController::class,'logout'])->name('logout');
-
     });
 });
 
 Route::prefix('gerant')->name('gerant.')->group(function(){
-
     Route::middleware(['guest:client','PreventBackHistory'])->group(function(){
         Route::view('/login','dashboard.gerant.login')->name('login');
         Route::view('/register','dashboard.gerant.register')->name('register');
@@ -62,17 +45,13 @@ Route::prefix('gerant')->name('gerant.')->group(function(){
     Route::middleware(['auth:gerant','PreventBackHistory'])->group(function(){
         Route::view('/home','dashboard.gerant.home')->name('home');
         Route::post('logout',[GerantController::class,'logout'])->name('logout');
-
         Route::get('/profile', [GerantController::class, 'profile'])->name("profile");
         Route::get('/profile/edit', [GerantController::class, 'editProfile'])->name("edit");
         Route::patch('/profile', [GerantController::class, 'updateProfile'])->name("update");
-
     });
-
 });
 
 Route::prefix('admin')->name('admin.')->group(function(){
-
     Route::middleware(['guest:admin','PreventBackHistory'])->group(function(){
         Route::view('/login','dashboard.admin.login')->name('login');
         Route::post('/check',[AdminController::class,'check'])->name('check');
@@ -82,5 +61,4 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::view('/home','dashboard.admin.home')->name('home');
         Route::post('logout',[AdminController::class,'logout'])->name('logout');
     });
-
 });
