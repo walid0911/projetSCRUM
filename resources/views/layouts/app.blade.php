@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ secue_asset('css/app.css') . "?" . time() }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/app.css') . "?" . time() }}" rel="stylesheet">
 
     <!-- Space for header -->
     <script>
