@@ -12,7 +12,7 @@ use Illuminate\Auth\SessionGuard;
 class GerantController extends Controller
 {
 
-    public function profile(Request $request)
+    public function profile()
     {
         $gerant = Auth::user();
         return view("gerant.profile", compact('gerant'));
